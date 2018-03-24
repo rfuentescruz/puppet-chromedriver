@@ -6,7 +6,8 @@
   "license": "MIT",
   "source": "",
   "dependencies": [
-
+    {"name": "puppet/archive", "version_requirement": ">= 2.3.0 < 3.0"},
+    {"name": "puppetlabs/stdlib", "version_requirement": ">= 4.25.0 < 5.0"}
   ],
   "operatingsystem_support": [
     {
@@ -43,14 +44,6 @@
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
         "16.04"
-      ]
-    },
-    {
-      "operatingsystem": "windows",
-      "operatingsystemrelease": [
-        "2008 R2",
-        "2012 R2",
-        "10"
       ]
     }
   ],

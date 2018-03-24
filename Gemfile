@@ -65,6 +65,8 @@ elsif puppet_type == :gem && puppet_older_than?('3.5.0')
   gems['hiera'] = ['>= 1.0.0', '<= 1.3.0', require: false]
 end
 
+gems['nokogiri'] = ['>= 1.8.2', '< 2.0', require: false]
+
 if Gem.win_platform? && (puppet_type != :gem || puppet_older_than?('3.5.0'))
   # For Puppet gems < 3.5.0 (tested as far back as 3.0.0) on Windows
   if puppet_type == :gem
