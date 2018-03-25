@@ -1,6 +1,12 @@
+require 'open-uri'
 require 'puppetlabs_spec_helper/module_spec_helper'
 require 'rspec-puppet-facts'
-require 'open-uri'
+
+require 'simplecov'
+SimpleCov.start
+
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
 begin
   require 'spec_helper_local' if File.file?(File.join(File.dirname(__FILE__), 'spec_helper_local.rb'))
@@ -51,5 +57,9 @@ RSpec.configure do |c|
     allow(OpenURI).to receive(:open_uri)
       .with(URI::HTTPS.build(host: 'chromedriver.storage.googleapis.com', path: '/'))
       .and_return(xml)
+  end
+
+  c.after(:suite) do
+    RSpec::Puppet::Coverage.report!
   end
 end
