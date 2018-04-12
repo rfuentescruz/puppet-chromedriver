@@ -7,6 +7,11 @@
 class chromedriver::install {
   include ::chromedriver::params
 
+  $packages = ['libgconf2-dev', 'libxi-dev', 'unzip', 'libnss3-dev']
+  package { $packages:
+    ensure => 'present',
+  }
+
   $versions = sort(chromedriver::fetch_versions())
 
   if empty($versions) {
@@ -35,7 +40,10 @@ class chromedriver::install {
       creates      => "${::chromedriver::install_dir}/chromedriver",
 
       before       => File['/usr/local/bin/chromedriver'],
-      require      => File[$::chromedriver::install_dir],
+      require      => [
+        File[$::chromedriver::install_dir],
+        Package['unzip'],
+      ],
     }
   }
 

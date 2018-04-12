@@ -8,7 +8,14 @@
 #   include chromedriver
 class chromedriver (
   String $version     = $::chromedriver::params::version,
-  String $install_dir = $::chromedriver::params::install_dir
+  String $install_dir = $::chromedriver::params::install_dir,
 ) inherits ::chromedriver::params {
-  require ::chromedriver::install
+
+  include ::chromedriver::install
+
+  package { 'nokogiri':
+    ensure   => 'present',
+    provider => 'puppet_gem',
+    before   => Class['::chromedriver::install'],
+  }
 }
