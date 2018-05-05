@@ -2,7 +2,7 @@
   "name": "rfuentescruz-chromedriver",
   "version": "0.1.0",
   "author": "Rolando Cruz",
-  "summary": "Installs chromedriver globally",
+  "summary": "Puppet module for installing chromedriver",
   "license": "MIT",
   "source": "https://github.com/rfuentescruz/puppet-chromedriver",
   "project_page": "https://sites.google.com/a/chromium.org/chromedriver/",

@@ -1,6 +1,6 @@
 # chromedriver::install
 #
-# @summary Installs the desired chromedriver
+# @summary Installs chromedriver
 #
 # @example
 #   include chromedriver::install
@@ -48,7 +48,7 @@ class chromedriver::install {
   }
 
   file { $::chromedriver::install_dir:
-    ensure => 'directory'
+    ensure => 'directory',
   }
 
   file { '/usr/local/bin/chromedriver':
