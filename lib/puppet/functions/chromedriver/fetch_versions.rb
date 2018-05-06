@@ -18,7 +18,7 @@ Puppet::Functions.create_function(:'chromedriver::fetch_versions') do
       match = %r{^(\d+\.\d+)\/}.match(i)
       if match then versions.add(match[1]) end
     end
-
+    versions = versions.sort_by { |v| Gem::Version.new(v) }
     versions.to_a
   end
 end

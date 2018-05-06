@@ -12,8 +12,8 @@ class chromedriver::install {
     ensure => 'present',
   }
 
-  $versions = sort(chromedriver::fetch_versions())
-
+  $versions = chromedriver::fetch_versions()
+  
   if empty($versions) {
     fail('Unable to get chromedriver versions')
   }

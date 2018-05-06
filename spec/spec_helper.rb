@@ -36,10 +36,13 @@ xml = <<XML
   <?xml version="1.0" encoding="UTF-8"?>
   <ListBucketResult xmlns="http://doc.s3.amazonaws.com/2006-03-01">
     <Contents>
-      <Key>2.11/chromedriver_linux64.zip</Key>
+      <Key>2.1/chromedriver_linux64.zip</Key>
     </Contents>
     <Contents>
-      <Key>2.1/chromedriver_linux64.zip</Key>
+      <Key>2.11/chromedriver_linux64.zip</Key>
+   </Contents>
+    <Contents>
+      <Key>2.2/chromedriver_linux64.zip</Key>
    </Contents>
   </ListBucketResult>
 XML

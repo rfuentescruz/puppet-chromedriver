@@ -25,10 +25,6 @@ Allows developers to manage their installation of `chromedriver` and make sure t
 
 This module requires the `nokogiri` gem to process the list of available `chromedriver` versions.
 
-```
-puppet gem install nokogiri
-```
-
 ## Usage
 
 ### Basic Usage
