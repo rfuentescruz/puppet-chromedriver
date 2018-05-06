@@ -1,6 +1,6 @@
 {
   "name": "rfuentescruz-chromedriver",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Rolando Cruz",
   "summary": "Puppet module for installing chromedriver",
   "license": "MIT",

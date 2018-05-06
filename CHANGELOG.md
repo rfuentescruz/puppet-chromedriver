@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.3.0
+
+**Bugfixes**
+
+ - Puppet will get stuck waiting for facts when checking versions of old
+   `chromedriver`s
+
 ## Release 0.2.0
 
 **Bugfixes**
