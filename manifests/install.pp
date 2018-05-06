@@ -44,6 +44,10 @@ class chromedriver::install {
         File[$::chromedriver::install_dir],
         Package['unzip'],
       ],
+    } ~>
+    file { "${::chromedriver::install_dir}/chromedriver":
+      ensure  => 'present',
+      mode    => '0755',
     }
   }
 
