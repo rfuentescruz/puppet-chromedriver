@@ -1,4 +1,4 @@
-version: 1.1.x.{build}
+version: 0.2.x.{build}
 skip_commits:
   message: /^\(?doc\)?.*/
 clone_depth: 10
@@ -51,7 +51,7 @@ test_script:
 notifications:
   - provider: Email
     to:
-      - nobody@nowhere.com
+      - rolando.cruz21@gmail.com
     on_build_success: false
     on_build_failure: false
     on_build_status_changed: false
