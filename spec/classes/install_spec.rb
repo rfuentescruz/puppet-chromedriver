@@ -47,7 +47,7 @@ describe 'chromedriver::install' do
 
     describe 'with no chromedriver installed' do
       it {
-        is_expected.to contain_archive('/tmp/chromedriver.zip')
+        is_expected.to contain_archive('/tmp/chromedriver-2.11.zip')
           .with_source('https://chromedriver.storage.googleapis.com/2.11/chromedriver_linux64.zip')
       }
     end
@@ -56,7 +56,7 @@ describe 'chromedriver::install' do
       let(:facts) { { 'chromedriver_version' => '1.0' } }
 
       it {
-        is_expected.to contain_archive('/tmp/chromedriver.zip')
+        is_expected.to contain_archive('/tmp/chromedriver-2.11.zip')
           .with_source('https://chromedriver.storage.googleapis.com/2.11/chromedriver_linux64.zip')
       }
     end
@@ -64,7 +64,7 @@ describe 'chromedriver::install' do
     describe 'when installed chromedriver version equals latest version' do
       let(:facts) { { 'chromedriver_version' => '2.11' } }
 
-      it { is_expected.not_to contain_archive('/tmp/chromedriver.zip') }
+      it { is_expected.not_to contain_archive('/tmp/chromedriver-2.11.zip') }
     end
   end
 
@@ -75,7 +75,7 @@ describe 'chromedriver::install' do
 
     describe 'with no chromedriver installed' do
       it {
-        is_expected.to contain_archive('/tmp/chromedriver.zip')
+        is_expected.to contain_archive('/tmp/chromedriver-2.1.zip')
           .with_source('https://chromedriver.storage.googleapis.com/2.1/chromedriver_linux64.zip')
       }
     end
@@ -84,7 +84,7 @@ describe 'chromedriver::install' do
       let(:facts) { { 'chromedriver_version' => '1.0' } }
 
       it {
-        is_expected.to contain_archive('/tmp/chromedriver.zip')
+        is_expected.to contain_archive('/tmp/chromedriver-2.1.zip')
           .with_source('https://chromedriver.storage.googleapis.com/2.1/chromedriver_linux64.zip')
       }
     end
@@ -93,7 +93,7 @@ describe 'chromedriver::install' do
       let(:facts) { { 'chromedriver_version' => '2.11' } }
 
       it {
-        is_expected.to contain_archive('/tmp/chromedriver.zip')
+        is_expected.to contain_archive('/tmp/chromedriver-2.1.zip')
           .with_source('https://chromedriver.storage.googleapis.com/2.1/chromedriver_linux64.zip')
       }
     end
@@ -101,7 +101,7 @@ describe 'chromedriver::install' do
     describe 'when installed chromedriver version equals desired version' do
       let(:facts) { { 'chromedriver_version' => '2.1' } }
 
-      it { is_expected.not_to contain_archive('/tmp/chromedriver.zip') }
+      it { is_expected.not_to contain_archive('/tmp/chromedriver-2.1.zip') }
     end
   end
 
@@ -109,7 +109,7 @@ describe 'chromedriver::install' do
     let(:pre_condition) { 'class { "chromedriver": install_dir => "/tmp/chromedriver" }' }
 
     it {
-      is_expected.to contain_archive('/tmp/chromedriver.zip')
+      is_expected.to contain_archive('/tmp/chromedriver-2.11.zip')
         .with_extract_path('/tmp/chromedriver')
     }
   end
