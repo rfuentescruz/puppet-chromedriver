@@ -21,9 +21,10 @@ describe 'chromedriver_version fact' do
         .with('chromedriver')
         .and_return('/path/to/chromedriver')
 
-      allow(Facter::Util::Resolution).to receive(:exec)
-        .with('chromedriver --version')
-        .and_return('ChromeDriver 1.2.3 (abc123)')
+      out = double
+      allow(out).to receive(:read).and_return("ChromeDriver 1.2.3 (abc123)\n")
+      allow(out).to receive(:closed?).and_return(true)
+      allow(IO).to receive(:popen).with('chromedriver --version').and_yield(out)
     end
 
     it { is_expected.to eq('1.2.3') }
