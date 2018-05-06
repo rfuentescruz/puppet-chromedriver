@@ -31,13 +31,13 @@ class chromedriver::install {
   $platform = "${::chromedriver::params::platform}${::chromedriver::params::arch}"
 
   if !$facts['chromedriver_version'] or (versioncmp($desired_version, $facts['chromedriver_version']) != 0) {
-    archive { '/tmp/chromedriver.zip':
+    archive { "/tmp/chromedriver-${desired_version}.zip":
       ensure       => 'present',
       source       => "${::chromedriver::params::source}/${desired_version}/chromedriver_${platform}.zip",
 
       extract      => true,
       extract_path => $::chromedriver::install_dir,
-      creates      => "${::chromedriver::install_dir}/chromedriver",
+      cleanup      => true,
 
       before       => File['/usr/local/bin/chromedriver'],
       require      => [
