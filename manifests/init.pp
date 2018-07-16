@@ -11,9 +11,4 @@ class chromedriver (
 
   include ::chromedriver::install
 
-  package { 'nokogiri':
-    ensure   => 'present',
-    provider => 'puppet_gem',
-    before   => Class['::chromedriver::install'],
-  }
 }

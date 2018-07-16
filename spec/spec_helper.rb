@@ -32,21 +32,6 @@ if File.exist?(default_module_facts_path) && File.readable?(default_module_facts
   default_facts.merge!(YAML.safe_load(File.read(default_module_facts_path)))
 end
 
-xml = <<XML
-  <?xml version="1.0" encoding="UTF-8"?>
-  <ListBucketResult xmlns="http://doc.s3.amazonaws.com/2006-03-01">
-    <Contents>
-      <Key>2.1/chromedriver_linux64.zip</Key>
-    </Contents>
-    <Contents>
-      <Key>2.11/chromedriver_linux64.zip</Key>
-   </Contents>
-    <Contents>
-      <Key>2.2/chromedriver_linux64.zip</Key>
-   </Contents>
-  </ListBucketResult>
-XML
-
 RSpec.configure do |c|
   c.default_facts = default_facts
 
@@ -58,8 +43,8 @@ RSpec.configure do |c|
 
   c.before(:each) do
     allow(OpenURI).to receive(:open_uri)
-      .with(URI::HTTPS.build(host: 'chromedriver.storage.googleapis.com', path: '/'))
-      .and_return(xml)
+      .with(URI::HTTPS.build(host: 'chromedriver.storage.googleapis.com', path: '/LATEST_RELEASE'))
+      .and_return('2.11')
   end
 
   c.after(:suite) do

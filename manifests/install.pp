@@ -10,20 +10,16 @@ class chromedriver::install {
   $packages = ['libgconf2-dev', 'libxi-dev', 'unzip', 'libnss3-dev']
   ensure_packages($packages, {'ensure' => 'present'})
 
-  $versions = chromedriver::fetch_versions()
+  $latest = chromedriver::fetch_latest_version()
 
-  if empty($versions) {
-    fail('Unable to get chromedriver versions')
+  if !$latest {
+    fail('Unable to get latest chromedriver version')
   }
 
   if $::chromedriver::version == 'latest' {
-    $desired_version = $versions[-1]
+    $desired_version = $latest
   } else {
     $desired_version = $::chromedriver::version
-  }
-
-  if !($desired_version in $versions) {
-    fail("Invalid version ${desired_version}. Supported versions are ${versions}")
   }
 
   $platform = "${::chromedriver::params::platform}${::chromedriver::params::arch}"
@@ -43,7 +39,6 @@ class chromedriver::install {
         Package['unzip'],
       ],
     } ~> file { "${::chromedriver::install_dir}/chromedriver":
-      ensure => 'present',
       mode   => '0755',
     }
   }

@@ -9,11 +9,11 @@ describe 'chromedriver::install' do
 
     before(:each) do
       allow(OpenURI).to receive(:open_uri)
-        .with(URI::HTTPS.build(host: 'chromedriver.storage.googleapis.com', path: '/'))
+        .with(URI::HTTPS.build(host: 'chromedriver.storage.googleapis.com', path: '/LATEST_RELEASE'))
         .and_raise(SocketError)
     end
 
-    it { is_expected.to compile.and_raise_error(%r{Unable to get chromedriver versions}) }
+    it { is_expected.to compile.and_raise_error(%r{Unable to get latest chromedriver version}) }
   end
 
   on_supported_os.each do |os, os_facts|
@@ -112,13 +112,5 @@ describe 'chromedriver::install' do
       is_expected.to contain_archive('/tmp/chromedriver-2.11.zip')
         .with_extract_path('/tmp/chromedriver')
     }
-  end
-
-  describe 'with invalid version' do
-    let(:pre_condition) do
-      'class { "chromedriver": version => "0.0" }'
-    end
-
-    it { is_expected.to compile.and_raise_error(%r{Invalid version}) }
   end
 end
