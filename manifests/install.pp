@@ -8,9 +8,7 @@ class chromedriver::install {
   include ::chromedriver::params
 
   $packages = ['libgconf2-dev', 'libxi-dev', 'unzip', 'libnss3-dev']
-  package { $packages:
-    ensure => 'present',
-  }
+  ensure_packages($packages, {'ensure' => 'present'})
 
   $versions = chromedriver::fetch_versions()
 
