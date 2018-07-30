@@ -35,8 +35,18 @@ describe 'chromedriver::install' do
     }
 
     it {
+      is_expected.to contain_file('/opt/chromedriver/2.11')
+        .with_ensure('directory')
+    }
+
+    it {
+      is_expected.to contain_file('/opt/chromedriver/2.11/chromedriver')
+        .with_mode('0755')
+    }
+
+    it {
       is_expected.to contain_file('/usr/local/bin/chromedriver')
-        .with_target('/opt/chromedriver/chromedriver')
+        .with_target('/opt/chromedriver/2.11/chromedriver')
     }
   end
 
@@ -109,8 +119,28 @@ describe 'chromedriver::install' do
     let(:pre_condition) { 'class { "chromedriver": install_dir => "/tmp/chromedriver" }' }
 
     it {
+      is_expected.to contain_file('/tmp/chromedriver')
+        .with_ensure('directory')
+    }
+
+    it {
+      is_expected.to contain_file('/tmp/chromedriver/2.11')
+        .with_ensure('directory')
+    }
+
+    it {
       is_expected.to contain_archive('/tmp/chromedriver-2.11.zip')
-        .with_extract_path('/tmp/chromedriver')
+        .with_extract_path('/tmp/chromedriver/2.11')
+    }
+
+    it {
+      is_expected.to contain_file('/tmp/chromedriver/2.11/chromedriver')
+        .with_mode('0755')
+    }
+
+    it {
+      is_expected.to contain_file('/usr/local/bin/chromedriver')
+        .with_target('/tmp/chromedriver/2.11/chromedriver')
     }
   end
 end

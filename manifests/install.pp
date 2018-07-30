@@ -25,30 +25,30 @@ class chromedriver::install {
   $platform = "${::chromedriver::params::platform}${::chromedriver::params::arch}"
 
   if !$facts['chromedriver_version'] or (versioncmp($desired_version, $facts['chromedriver_version']) != 0) {
-    archive { "/tmp/chromedriver-${desired_version}.zip":
+    $version_dir = "${::chromedriver::install_dir}/${desired_version}"
+
+    file { $version_dir:
+      ensure  => 'directory',
+      require => File[$::chromedriver::install_dir],
+    } -> archive { "/tmp/chromedriver-${desired_version}.zip":
       ensure       => 'present',
       source       => "${::chromedriver::params::source}/${desired_version}/chromedriver_${platform}.zip",
 
       extract      => true,
-      extract_path => $::chromedriver::install_dir,
+      extract_path => $version_dir,
       cleanup      => true,
+      creates      => "${version_dir}/chromedriver",
 
-      before       => File['/usr/local/bin/chromedriver'],
-      require      => [
-        File[$::chromedriver::install_dir],
-        Package['unzip'],
-      ],
-    } ~> file { "${::chromedriver::install_dir}/chromedriver":
+      require      => Package['unzip'],
+    } -> file { "${version_dir}/chromedriver":
       mode   => '0755',
+    } -> file { '/usr/local/bin/chromedriver':
+      ensure => 'link',
+      target => "${version_dir}/chromedriver",
     }
   }
 
   file { $::chromedriver::install_dir:
     ensure => 'directory',
-  }
-
-  file { '/usr/local/bin/chromedriver':
-    ensure => 'link',
-    target => "${::chromedriver::install_dir}/chromedriver",
   }
 }
