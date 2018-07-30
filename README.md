@@ -23,8 +23,6 @@ Allows developers to manage their installation of `chromedriver` and make sure t
 
 ### Setup Requirements
 
-This module requires the `nokogiri` gem to process the list of available `chromedriver` versions.
-
 ## Usage
 
 ### Basic Usage
