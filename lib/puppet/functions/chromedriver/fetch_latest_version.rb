@@ -1,8 +1,12 @@
 require 'open-uri'
 
 Puppet::Functions.create_function(:'chromedriver::fetch_latest_version') do
-  def fetch_latest_version
-    open('https://chromedriver.storage.googleapis.com/LATEST_RELEASE') do |f|
+  dispatch :fetch_latest_version do
+    optional_param 'String', :source
+  end
+
+  def fetch_latest_version(source = 'https://chromedriver.storage.googleapis.com')
+    open("#{source}/LATEST_RELEASE") do |f|
       f.read
     end
   rescue SocketError

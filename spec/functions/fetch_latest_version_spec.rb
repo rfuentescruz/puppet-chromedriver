@@ -9,6 +9,7 @@ RSpec.describe 'chromedriver::fetch_latest_version' do
     end
 
     it { is_expected.to run.and_return('2.11') }
+    it { is_expected.to run.with_params('https://chromedriver.storage.googleapis.com').and_return('2.11') }
   end
 
   describe 'on failed call' do
@@ -19,5 +20,6 @@ RSpec.describe 'chromedriver::fetch_latest_version' do
     end
 
     it { is_expected.to run.and_return(nil) }
+    it { is_expected.to run.with_params('https://chromedriver.storage.googleapis.com').and_return(nil) }
   end
 end
