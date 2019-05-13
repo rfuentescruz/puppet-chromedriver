@@ -26,4 +26,5 @@ class chromedriver::params {
   }
 
   $source = 'https://chromedriver.storage.googleapis.com'
+  $link_target = '/usr/local/bin/chromedriver'
 }
